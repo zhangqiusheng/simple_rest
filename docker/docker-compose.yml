@@ -1,8 +1,19 @@
 version: "2"
 
 services:
-  application-0:
-    image: registry.training.local/application-0:${IMAGE_VERSION}
+  application-0-blue:
+    image: "registry.training.local/application-0:${BLUE_IMAGE_VERSION}"
     network_mode: bridge
+    environment:
+      - "SERVICE_NAME=application-0"
+      - "SERVICE_TAGS=blue_v${BLUE_IMAGE_VERSION}"
     ports:
-      - "80:4567"
+      - "4567"
+  application-0-green:
+    image: "registry.training.local/application-0:${GREEN_IMAGE_VERSION}"
+    network_mode: bridge
+    environment:
+      - "SERVICE_NAME=application-0"
+      - "SERVICE_TAGS=green_v${GREEN_IMAGE_VERSION}"
+    ports:
+      - "4567"
